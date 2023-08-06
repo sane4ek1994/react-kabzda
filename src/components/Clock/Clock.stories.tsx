@@ -1,8 +1,21 @@
-import {useEffect, useRef, useState} from "react";
+import {LegacyRef, useEffect, useRef, useState} from "react";
 import './styles.css'
 
 export default {
     title: 'Clock demo'
+}
+
+
+type TClock = {
+    hours: number
+    minutes: number
+    seconds: number
+}
+
+type TAnalogClock = {
+    hourHandle: LegacyRef<HTMLDivElement> | null | undefined
+    minuteHandle: LegacyRef<HTMLDivElement> | null | undefined
+    secondHandle: LegacyRef<HTMLDivElement> | null | undefined
 }
 
 const addZero = (time: number): any => time >= 0 && time < 10 ? `0${time}` : time
@@ -18,9 +31,9 @@ const DiditalClock = ({hours, minutes, seconds}: TClock) => {
 
     )
 }
-const AnalogClock = ({hourHandle, minuteHandle, secondHandle}: any) => {
+const AnalogClock = ({hourHandle, minuteHandle, secondHandle}: TAnalogClock) => {
     console.log('render analog')
-    // подчини эти часы!
+
     return (
         <div className="clock-container">
             <div className="clock">
@@ -36,12 +49,6 @@ const AnalogClock = ({hourHandle, minuteHandle, secondHandle}: any) => {
             </div>
         </div>
     )
-}
-
-type TClock = {
-    hours: number
-    minutes: number
-    seconds: number
 }
 export const Clock = () => {
 
@@ -61,8 +68,6 @@ export const Clock = () => {
     useEffect(() => {
         const interval = setInterval(() => {
 
-
-            console.log({secondHandle, minuteHandle, hourHandle})
             if (secondHandle.current && minuteHandle.current && hourHandle.current) {
                 secondHandle.current.style.transform = `rotateZ(${ss * 6}deg)`;
                 minuteHandle.current.style.transform = `rotateZ(${mm * 6}deg)`;
@@ -70,9 +75,7 @@ export const Clock = () => {
                 console.log(hh, mm, ss)
             }
 
-
             setDate(new Date())
-            console.log('TICK')
         }, 1000)
         return () => clearInterval(interval)
     }, [hh, mm, ss])
