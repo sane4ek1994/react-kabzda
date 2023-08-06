@@ -53,39 +53,3 @@ export const UseEffectExample = () => {
         <button onClick={() => setFake(fake + 1)}>Fake +</button>
     </>
 }
-
-export const ExampleTimer = () => {
-    // const [counter, setCounter] = useState(0);
-    // const [fake, setFake] = useState(77);
-    //
-    // console.log('ExampleTimer render')
-    //
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         console.log(`tick: ${counter}`)
-    //         setCounter(state => state + 1)
-    //     }, 1000)
-    // }, [])
-
-
-    const [hours, setHours] = useState<number>(0);
-    const [minutes, setMinutes] = useState<number>(0);
-    const [seconds, setSeconds] = useState<number>(0);
-
-    const addZero = (time: number): any => time >= 0 && time < 10 ? `0${time}` : time
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const date = new Date()
-
-            setHours(addZero(date.getHours()))
-            setMinutes(addZero(date.getMinutes()))
-            setSeconds(addZero(date.getSeconds()))
-        }, 1000)
-        return () => clearInterval(interval)
-    }, [])
-
-    return <div>
-        {`${hours}:${minutes}:${seconds}`}
-    </div>
-}

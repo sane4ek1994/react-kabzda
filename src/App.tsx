@@ -5,6 +5,7 @@ import {Raiting} from './components/Raiting/Raiting'
 import './App.css'
 import {UncontrolOnOff} from "./components/UncontrolOnoff/UncontrolOnOff";
 import {Select} from "./components/Select/Select";
+import {Clock} from "./components/Clock/Clock";
 
 function App() {
     const [toggleSwitch, setToggleSwitch] = useState(false);
@@ -35,7 +36,7 @@ function App() {
             <h2>Control component switch</h2>
             {/*<ControlOnOff toggleSwitch={toggleSwitch} setToggleSwitch={setToggleSwitch}/>*/}
 
-
+            <Clock/>
         </div>
     )
 }
